@@ -22,3 +22,24 @@ Start [PocketBase](https://pocketbase.io/) server:
 **Admin UI:** [http://127.0.0.1:8090/_/](http://127.0.0.1:8090/_/)
 
 **REST API:** [http://127.0.0.1:8090/api/](http://127.0.0.1:8090/api/)
+
+
+### Database schema
+
+#### Classes
+- tests: [Test]
+
+#### Test
+- name: String
+- image: String
+- questions: [Question]
+
+#### Question
+- question: String
+- answers: [Answer]
+
+#### Answer
+- answer: String
+- correct: Boolean
+- choices: Number
+
