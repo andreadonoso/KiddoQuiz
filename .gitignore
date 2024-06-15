@@ -1,1 +1,3 @@
 .DS_STORE
+*.db-shm
+*.db-wal
