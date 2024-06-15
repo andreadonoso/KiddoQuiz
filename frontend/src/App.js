@@ -1,5 +1,7 @@
 import * as React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PocketBase from 'pocketbase';
+
 import HomePage from "./pages/HomePage";
 import TemplateSelectionPage from "./pages/TemplateSelectionPage";
 import UploadPage from "./pages/UploadPage";
@@ -8,6 +10,9 @@ import QuizViewPage from "./pages/QuizViewPage";
 import QRPage from "./pages/QRPage";
 import ResultsPage from "./pages/ResultsPage";
 import QuizCompletedPage from "./pages/QuizCompletedPage";
+import AdminPage from "./pages/AdminPage";
+
+const pb = new PocketBase('http://127.0.0.1:8090');
 
 function App() {
 	return (
@@ -28,6 +33,7 @@ function App() {
 						path="/quiz-completed"
 						element={<QuizCompletedPage />}
 					/>
+					<Route path="/admin" element={<AdminPage pb={pb} />} />
 				</Routes>
 			</BrowserRouter>
 		</>
