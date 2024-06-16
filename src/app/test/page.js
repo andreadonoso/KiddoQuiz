@@ -5,7 +5,7 @@ async function getTest() {
   const pb = await pocketBase();
   const test = await pb.collection('tests').getFullList({
     expand: "questions",
-    sort: "-created",
+    sort: "+created",
   });
   return test[0];
 }
@@ -28,5 +28,5 @@ async function getQuestionsAndAnswers(test) {
 export default async function Test() {
   const test = await getTest();
   const questionsAndAnswers = await getQuestionsAndAnswers(test);
-  return <TestPage />;
+  return <TestPage test={test} questionsAndAnswers={questionsAndAnswers} />;
 }
