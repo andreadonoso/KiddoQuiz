@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { formatDistance } from "date-fns";
 
@@ -34,7 +34,7 @@ import logo from "../assets/logo.png";
 import { useState } from "react";
 import { getImageURL } from "@/utils/pocketbase";
 
-export default function HomePage({classList}) {
+export default function HomePage({ classList }) {
   const drawerWidth = 240;
 
   const theme = useTheme();
@@ -44,8 +44,6 @@ export default function HomePage({classList}) {
     setOpen(!open);
   };
   const name = "";
-  const className = "";
-  const date = "";
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -54,7 +52,10 @@ export default function HomePage({classList}) {
         position="fixed"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: "#ffffff",
+          borderBottom: "1px solid #000",
         }}
+        elevation={0}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <img src={logo.src} alt="Logo" style={{ height: 40 }} />
@@ -93,7 +94,7 @@ export default function HomePage({classList}) {
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {classList.map(({id, name}) => (
+                {classList.map(({ id, name }) => (
                   <ListItem key={id} disablePadding>
                     <ListItemButton>
                       <ListItemText primary={name} />
@@ -158,31 +159,36 @@ export default function HomePage({classList}) {
           columns={{ xs: 2, sm: 2, md: 8, lg: 12 }}
         >
           <Grid item xs={2} sm={4} md={4}>
-            <Card
-              sx={{
-                maxWidth: 345,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-                height: "100%",
-                border: "1px solid #000",
-              }}
-              elevation={0}
-            >
-              <CardContent>
-                <AddRoundedIcon sx={{ fontSize: "90px" }} />
-                <Typography gutterBottom variant="h4" component="div">
-                  Create Quiz
-                </Typography>
-              </CardContent>
-            </Card>
+            <a href="/create">
+              <Card
+                sx={{
+                  maxWidth: 345,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  height: "100%",
+                  border: "1px solid #000",
+                }}
+                elevation={0}
+              >
+                <CardContent>
+                  <AddRoundedIcon sx={{ fontSize: "90px" }} />
+                  <Typography gutterBottom variant="h4" component="div">
+                    Create Quiz
+                  </Typography>
+                </CardContent>
+              </Card>
+            </a>
           </Grid>
           {classList[0].expand.tests.map((test) => (
             <Grid item xs={2} sm={4} md={4} key={test.id}>
               <Card sx={{ maxWidth: 345 }}>
-                <CardMedia sx={{ height: 140 }} image={getImageURL(test.collectionId, test.id, test.cover)} />
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={getImageURL(test.collectionId, test.id, test.cover)}
+                />
                 <CardContent>
                   <Typography variant="body2" color="text.secondary">
                     {formatDistance(test.updated, new Date(), {
@@ -200,9 +206,15 @@ export default function HomePage({classList}) {
                     justifyContent: "space-between",
                   }}
                 >
-                  <Button size="small" href={`/quiz/edit/${test.id}`}>Edit</Button>
-                  <Button size="small" href={`/quiz/scores/${test.id}`}>Scores</Button>
-                  <Button size="small" href={`/quiz/qr/${test.id}`}>Share</Button>
+                  <Button size="small" href={`/quiz/edit/${test.id}`}>
+                    Edit
+                  </Button>
+                  <Button size="small" href={`/quiz/scores/${test.id}`}>
+                    Scores
+                  </Button>
+                  <Button size="small" href={`/quiz/qr/${test.id}`}>
+                    Share
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>
@@ -211,4 +223,4 @@ export default function HomePage({classList}) {
       </Box>
     </Box>
   );
-};
+}
