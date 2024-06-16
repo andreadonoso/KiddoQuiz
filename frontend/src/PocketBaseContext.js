@@ -5,7 +5,7 @@ export const PocketBaseContext = React.createContext();
 
 const POCKETBASE_ADMIN_USER = "admin@kiddoquiz.loc";
 const POCKETBASE_ADMIN_PASS = "supersecret";
-export const POCKETBASE_BASE_URL = "http://127.0.0.1:8090";
+export const POCKETBASE_BASE_URL = "https://admin.kq.fernando.is";
 
 export const PocketBaseProvider = ({ children }) => {
   const pb = new PocketBase(POCKETBASE_BASE_URL);
