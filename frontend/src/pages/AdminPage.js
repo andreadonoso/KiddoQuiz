@@ -86,6 +86,13 @@ const Admin = () => {
                   />
                   <h2>{test.name}</h2>
 
+                  <a href={`/quiz-view/${test.id}`} target="_blank">
+                    Quiz View
+                  </a>
+                  <a href={`/qr/${test.id}`} target="_blank">
+                    QR Code
+                  </a>
+
                   <fieldset>
                     <legend>Questions</legend>
                     {test.questions.map((question) => (
@@ -96,7 +103,7 @@ const Admin = () => {
                             <li key={answer.id}>{answer.answer}</li>
                           ))}
                         </ul>
-												<hr />
+                        <hr />
                       </div>
                     ))}
                   </fieldset>

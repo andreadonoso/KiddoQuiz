@@ -1,5 +1,9 @@
+import { useParams } from "react-router-dom";
+
 const QuizViewPage = () => {
-	return <div>QuizViewPage</div>;
+	const { slug } = useParams();
+
+	return <div>Viewing test id: {slug}</div>;
 };
 
 export default QuizViewPage;

@@ -26,8 +26,8 @@ function App() {
             />
             <Route path="/upload" element={<UploadPage />} />
             <Route path="/test-preview" element={<TestPreviewPage />} />
-            <Route path="/quiz-view" element={<QuizViewPage />} />
-            <Route path="/qr" element={<QRPage />} />
+            <Route path="/quiz-view/:slug" element={<QuizViewPage />} />
+            <Route path="/qr/:slug" element={<QRPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/quiz-completed" element={<QuizCompletedPage />} />
             <Route path="/admin" element={<AdminPage />} />
