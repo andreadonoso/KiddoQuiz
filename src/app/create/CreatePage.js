@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from "react";
 import { Box, Toolbar, Fade } from "@mui/material";
@@ -53,8 +53,8 @@ const CreatePage = () => {
 					{title === "Select Template" && (
 						<SelectTemplate handleClick={handleClick} />
 					)}
-					{title === "Preview Test" && (
-						<PreviewTest handleClick={handleClick} />
+					{title === "Edit Test" && (
+						<EditTest handleClick={handleClick} />
 					)}
 				</Box>
 			</Fade>
