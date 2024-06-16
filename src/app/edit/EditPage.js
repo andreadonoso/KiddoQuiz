@@ -16,22 +16,8 @@ import {
 	TextField,
 } from "@mui/material";
 
-const EditPage = () => {
-	const [questions, setQuestions] = useState([
-		{ question: "Question number one?" },
-		{ question: "Question number two?" },
-		{ question: "Question number three?" },
-	]);
-	const [choices, setChoices] = useState([
-		{ questionChoices: ["Choice 1", "Choice 2", "Choice 3"] },
-		{ questionChoices: ["Choice 1", "Choice 2", "Choice 3"] },
-		{ questionChoices: ["Choice 1", "Choice 2", "Choice 3"] },
-	]);
-	const [answers, setAnswers] = useState([
-		{ selectedChoice: "" },
-		{ selectedChoice: "" },
-		{ selectedChoice: "" },
-	]);
+const EditPage = (data) => {
+	const [questions, setQuestions] = useState(data.questionsAndAnswers);
 
 	const [form, setForm] = useState({ testName: "", questionsData: [] });
 
@@ -46,18 +32,6 @@ const EditPage = () => {
 		updatedAnswers[questionIndex].selectedChoice =
 			choices[questionIndex].questionChoices[choiceIndex];
 		setAnswers(updatedAnswers);
-	};
-
-	const handleSave = () => {
-		const formData = {
-			testName: form.testName,
-			questionsData: questions.map((question, index) => ({
-				question: question.question,
-				answer: answers[index].selectedChoice,
-			})),
-		};
-		setForm(formData);
-		console.log("Form Data:", formData);
 	};
 
 	return (
@@ -114,7 +88,7 @@ const EditPage = () => {
 						fullWidth
 						required
 						variant="filled"
-						value={form.testName}
+						value={data.test.name}
 						onChange={(e) =>
 							setForm({ ...form, testName: e.target.value })
 						}
@@ -148,59 +122,33 @@ const EditPage = () => {
 									</ListItem>
 
 									<RadioGroup>
-										{choices[index]?.questionChoices.map(
-											(choice, choiceIndex) => (
-												<FormControlLabel
-													key={choiceIndex}
-													control={
-														<Radio
-															checked={
-																answers[index]
-																	.selectedChoice ===
-																choices[index]
-																	.questionChoices[
-																	choiceIndex
-																]
-															}
-															onChange={() =>
-																handleChoiceChange(
-																	index,
-																	choiceIndex
-																)
-															}
-														/>
-													}
-													label={
-														<TextField
-															fullWidth
-															required
-															variant="filled"
-															value={choice}
-															onChange={(e) =>
-																handleChoiceChange(
-																	index,
-																	choiceIndex,
-																	e.target
-																		.value
-																)
-															}
-														/>
-													}
-													sx={{ pl: 4 }}
-												/>
-											)
-										)}
+										{question.answers.map((answer) => (
+											<FormControlLabel
+												key={answer.id}
+												control={
+													<Radio
+														checked={
+															answer.is_correct
+														}
+													/>
+												}
+												label={
+													<TextField
+														fullWidth
+														required
+														variant="filled"
+														value={answer.answer}
+													/>
+												}
+												sx={{ pl: 4 }}
+											/>
+										))}
 									</RadioGroup>
 								</div>
 							);
 						})}
 					</List>
-					<Button
-						sx={{ mt: 5 }}
-						variant="contained"
-						onClick={handleSave}
-						disabled={!form.testName}
-					>
+					<Button sx={{ mt: 5 }} variant="contained" href="/">
 						Save
 					</Button>
 				</Box>
