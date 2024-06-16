@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
@@ -34,7 +35,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
 import logo from "../assets/logo.png";
-import pic from "../assets/pic.png";
+import samplePic from "../assets/pic.png";
 
 const drawerWidth = 240;
 
@@ -49,13 +50,34 @@ const Item = styled(Paper)(({ theme }) => ({
 const HomePage = () => {
 	const theme = useTheme();
 	const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+
 	const [open, setOpen] = React.useState(true);
 	const handleClick = () => {
 		setOpen(!open);
 	};
-	const name = "";
-	const className = "";
-	const date = "";
+
+	const name = "Maria";
+	const className = "New Class";
+	var today = new Date();
+	var month = today.toLocaleString("default", { month: "short" });
+	var day = today.getDate(); // Use getDate() for numeric day
+	var year = "20" + today.getFullYear().toString().slice(-2);
+	const newPic = "";
+
+	const [cards, setCards] = useState([
+		{ date: "Jun 15 2024", className: "History Class", pic: samplePic },
+	]);
+
+	const handleCreateQuizClick = () => {
+		const newCard = {
+			date:
+				month.toString() + " " + day.toString() + " " + year.toString(),
+			className: className,
+			pic: newPic,
+		};
+		setCards([newCard, ...cards]);
+	};
+
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -63,10 +85,16 @@ const HomePage = () => {
 				position="fixed"
 				sx={{
 					zIndex: (theme) => theme.zIndex.drawer + 1,
+					backgroundColor: "#ffffff",
+					borderBottom: "1px solid #000",
 				}}
+				elevation={0}
 			>
 				<Toolbar
-					sx={{ display: "flex", justifyContent: "space-between" }}
+					sx={{
+						display: "flex",
+						justifyContent: "space-between",
+					}}
 				>
 					<img src={logo} alt="Logo" style={{ height: 40 }} />
 					<Avatar>MA</Avatar>
@@ -161,7 +189,7 @@ const HomePage = () => {
 					mb={4}
 				>
 					<Typography variant={isSmallScreen ? "h5" : "h4"}>
-						Welcome {name ? name : "Prof!"}
+						Welcome {name ? name : "Prof"}!
 					</Typography>
 					<Typography variant={isSmallScreen ? "h6" : "h5"}>
 						Your Quizzes
@@ -170,10 +198,16 @@ const HomePage = () => {
 
 				<Grid
 					container
-					spacing={{ xs: 2, md: 3 }}
-					columns={{ xs: 2, sm: 2, md: 8, lg: 12 }}
+					spacing={{ xs: 2, md: 5 }}
+					columns={{
+						xs: 4,
+						sm: 4,
+						md: 8,
+						lg: 12,
+						xl: 16,
+					}}
 				>
-					<Grid item xs={2} sm={4} md={4}>
+					<Grid item xs={4} sm={4} md={4}>
 						<Card
 							sx={{
 								maxWidth: 345,
@@ -184,11 +218,19 @@ const HomePage = () => {
 								textAlign: "center",
 								height: "100%",
 								border: "1px solid #000",
+								borderRadius: 3,
+								cursor: "pointer",
+								"&:hover": {
+									backgroundColor: "rgba(0, 0, 0, 0.03)",
+								},
 							}}
 							elevation={0}
+							onClick={handleCreateQuizClick}
 						>
 							<CardContent>
-								<AddRoundedIcon sx={{ fontSize: "90px" }} />
+								<AddRoundedIcon
+									sx={{ fontSize: "90px", m: 2 }}
+								/>
 								<Typography
 									gutterBottom
 									variant="h4"
@@ -199,25 +241,41 @@ const HomePage = () => {
 							</CardContent>
 						</Card>
 					</Grid>
-					{Array.from(Array(6)).map((_, index) => (
-						<Grid item xs={2} sm={4} md={4} key={index}>
-							<Card sx={{ maxWidth: 345 }}>
-								<CardMedia sx={{ height: 140 }} image={pic} />
-								<CardContent>
+					{cards.map((card, index) => (
+						<Grid item xs={4} sm={4} md={4} key={index}>
+							<Card
+								sx={{
+									maxWidth: 345,
+									border: "1px solid #000",
+									borderRadius: 3,
+								}}
+								elevation={0}
+							>
+								<CardMedia
+									sx={{ height: 140, cursor: "pointer" }}
+									image={card.pic ? card.pic : samplePic}
+								/>
+								<CardContent
+									sx={{
+										cursor: "pointer",
+										"&:hover": {
+											backgroundColor:
+												"rgba(0, 0, 0, 0.03)",
+										},
+									}}
+								>
 									<Typography
 										variant="body2"
 										color="text.secondary"
 									>
-										{date ? date : "June 15th, 2024"}
+										{card.date}
 									</Typography>
 									<Typography
 										gutterBottom
 										variant="h6"
 										component="div"
 									>
-										{className
-											? className
-											: "History Class One"}
+										{card.className}
 									</Typography>
 								</CardContent>
 								<Divider />
