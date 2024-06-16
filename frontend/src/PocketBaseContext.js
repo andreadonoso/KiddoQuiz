@@ -3,6 +3,8 @@ import PocketBase from "pocketbase";
 
 export const PocketBaseContext = React.createContext();
 
+const POCKETBASE_ADMIN_USER = "admin@kiddoquiz.loc";
+const POCKETBASE_ADMIN_PASS = "supersecret";
 export const POCKETBASE_BASE_URL = "http://127.0.0.1:8090";
 
 export const PocketBaseProvider = ({ children }) => {
@@ -11,9 +13,11 @@ export const PocketBaseProvider = ({ children }) => {
   useEffect(() => {
     const authenticate = async () => {
       try {
-        await pb.admins.authWithPassword("hello@fernando.is", "TUP!zar_twg7wbj*ruc");
-      } catch (_) {
-      }
+        await pb.admins.authWithPassword(
+          POCKETBASE_ADMIN_USER,
+          POCKETBASE_ADMIN_PASS
+        );
+      } catch (_) {}
     };
 
     authenticate();
