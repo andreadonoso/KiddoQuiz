@@ -257,6 +257,9 @@ const SelectTemplate = ({ handleClick }) => {
 				variant="contained"
 				onClick={() => {
 					handleClick("Preview Test");
+					setTimeout(() => {
+						window.scrollTo(0, 0);
+					}, 298);
 				}}
 			>
 				Continue
