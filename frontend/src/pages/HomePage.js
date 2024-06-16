@@ -29,6 +29,7 @@ import {
 	useTheme,
 	Avatar,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -96,7 +97,13 @@ const HomePage = () => {
 						justifyContent: "space-between",
 					}}
 				>
-					<img src={logo} alt="Logo" style={{ height: 40 }} />
+					<Link to="/">
+						<img
+							src={logo}
+							alt="Logo"
+							style={{ height: 40, cursor: "pointer" }}
+						/>
+					</Link>
 					<Avatar>MA</Avatar>
 				</Toolbar>
 			</AppBar>
@@ -223,9 +230,12 @@ const HomePage = () => {
 								"&:hover": {
 									backgroundColor: "rgba(0, 0, 0, 0.03)",
 								},
+								textDecoration: "none",
 							}}
 							elevation={0}
 							onClick={handleCreateQuizClick}
+							component={Link}
+							to="/create"
 						>
 							<CardContent>
 								<AddRoundedIcon
