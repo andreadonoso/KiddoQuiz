@@ -1,5 +1,14 @@
 const demoQuestions = [
   {
+    question: "In which year was the city of Miami officially incorporated?",
+    answers: [
+      { answer: "1866", choices: 0, is_correct: false },
+      { answer: "1886", choices: 0, is_correct: false },
+      { answer: "1896", choices: 0, is_correct: true },
+      { answer: "1906", choices: 0, is_correct: false },
+    ],
+  },
+  {
     question:
       "Who is often referred to as the “Mother of Miami” for her pivotal role in its development?",
     answers: [
@@ -46,7 +55,7 @@ const PocketBase = require("pocketbase/cjs");
 async function run() {
   const POCKETBASE_BASE_URL = "http://127.0.0.1:8090";
   const pb = new PocketBase(POCKETBASE_BASE_URL);
-  await pb.admins.authWithPassword("hello@fernando.is", "TUP!zar_twg7wbj*ruc");
+  await pb.admins.authWithPassword("admin@kiddoquiz.loc", "supersecret");
 
   for (const question of demoQuestions) {
     const answerIds = [];
