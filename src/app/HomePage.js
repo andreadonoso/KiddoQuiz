@@ -35,8 +35,6 @@ import { useState } from "react";
 import { getImageURL } from "@/utils/pocketbase";
 
 export default function HomePage({classList}) {
-
-  console.log(classList)
   const drawerWidth = 240;
 
   const theme = useTheme();
