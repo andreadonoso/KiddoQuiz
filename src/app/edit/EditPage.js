@@ -6,22 +6,17 @@ import {
 	Box,
 	Typography,
 	Button,
-	Toolbar,
-	Fade,
 	List,
 	ListItemText,
-	ListItemIcon,
 	ListItem,
-	ListItemButton,
-	Checkbox,
 	Radio,
 	RadioGroup,
 	FormControlLabel,
+	Toolbar,
 	TextField,
 } from "@mui/material";
 
 const EditPage = () => {
-	// const [form, setForm] = useState([testName]);
 	const [questions, setQuestions] = useState([
 		{ question: "Question number one?" },
 		{ question: "Question number two?" },
@@ -33,25 +28,42 @@ const EditPage = () => {
 		{ questionChoices: ["Choice 1", "Choice 2", "Choice 3"] },
 	]);
 	const [answers, setAnswers] = useState([
-		{ answer: "Answer number one" },
-		{ answer: "Answer number two" },
-		{ answer: "Answer number three" },
+		{ selectedChoice: "" },
+		{ selectedChoice: "" },
+		{ selectedChoice: "" },
 	]);
 
-	const [checked, setChecked] = React.useState([0]);
+	const [form, setForm] = useState({ testName: "", questionsData: [] });
 
-	const [selectedChoices, setSelectedChoices] = useState({});
+	const handleQuestionChange = (index, newValue) => {
+		const updatedQuestions = [...questions];
+		updatedQuestions[index].question = newValue;
+		setQuestions(updatedQuestions);
+	};
 
-	const handleChoiceChange = (questionIndex, choice) => {
-		setSelectedChoices((prev) => ({
-			...prev,
-			[questionIndex]: choice,
-		}));
+	const handleChoiceChange = (questionIndex, choiceIndex) => {
+		const updatedAnswers = [...answers];
+		updatedAnswers[questionIndex].selectedChoice =
+			choices[questionIndex].questionChoices[choiceIndex];
+		setAnswers(updatedAnswers);
+	};
+
+	const handleSave = () => {
+		const formData = {
+			testName: form.testName,
+			questionsData: questions.map((question, index) => ({
+				question: question.question,
+				answer: answers[index].selectedChoice,
+			})),
+		};
+		setForm(formData);
+		console.log("Form Data:", formData);
 	};
 
 	return (
-		<>
+		<Box sx={{ width: "100%" }}>
 			<Header />
+			<Toolbar />
 			<Box
 				sx={{
 					display: "flex",
@@ -65,80 +77,135 @@ const EditPage = () => {
 					sx={{ ml: 3 }}
 					variant="contained"
 					color="secondary"
-					onClick={() => {
-						handleClick("Select Template");
-						// alert("Warning: all changes will be lost");
-					}}
+					onClick={() => {}}
 				>
 					Back
 				</Button>
 			</Box>
-			<Typography variant="h3" pb={4}>
-				Edit Test
-			</Typography>
-			<TextField
-				id="outlined-basic"
-				label="Test name"
-				variant="outlined"
-			/>
 
-			<List
+			<Box
 				sx={{
-					width: "100%",
-					maxWidth: 360,
-					bgcolor: "background.paper",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
 				}}
 			>
-				{questions.map((question, index) => {
-					const labelId = `checkbox-list-label-${index}`;
-					return (
-						<div key={index}>
-							<ListItem disablePadding>
-								<ListItemText
-									id={labelId}
-									primary={`${index + 1} `}
-								/>
-								<TextField
-									id="outlined-basic"
-									label="Test name"
-									// variant="default"
-									defaultValue={question.question}
-								/>
-							</ListItem>
+				<Typography variant="h3" pb={4}>
+					Edit Test
+				</Typography>
 
-							<RadioGroup
-								value={selectedChoices[index] || ""}
-								onChange={(event) =>
-									handleChoiceChange(
-										index,
-										event.target.value
-									)
-								}
-							>
-								{choices[index]?.questionChoices.map(
-									(choice, choiceIndex) => (
-										<FormControlLabel
-											key={choiceIndex}
-											value={choice}
-											control={<Radio />}
-											label={choice}
-											sx={{ pl: 4 }}
+				<Box
+					sx={{
+						width: "500px",
+						bgcolor: "background.paper",
+						border: "1px solid #000",
+						borderRadius: "3px",
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "center",
+						p: 5,
+						mb: 10,
+					}}
+				>
+					<TextField
+						id="outlined-basic"
+						label="Test name"
+						fullWidth
+						required
+						variant="filled"
+						value={form.testName}
+						onChange={(e) =>
+							setForm({ ...form, testName: e.target.value })
+						}
+					/>
+
+					<List sx={{ pt: 5 }}>
+						{questions.map((question, index) => {
+							const labelId = `checkbox-list-label-${index}`;
+							return (
+								<div key={index}>
+									<ListItem sx={{ pt: 3 }}>
+										<ListItemText
+											id={labelId}
+											primary={`${index + 1} `}
 										/>
-									)
-								)}
-							</RadioGroup>
-						</div>
-					);
-				})}
-			</List>
-			<Button
-				sx={{ mt: 5, mb: 5 }}
-				variant="contained"
-				onClick={() => {}}
-			>
-				Save
-			</Button>
-		</>
+										<TextField
+											fullWidth
+											required
+											variant="filled"
+											id="filled-required"
+											label={"Question " + `${index + 1}`}
+											value={questions[index].question}
+											onChange={(e) =>
+												handleQuestionChange(
+													index,
+													e.target.value
+												)
+											}
+											sx={{ ml: 2 }}
+										/>
+									</ListItem>
+
+									<RadioGroup>
+										{choices[index]?.questionChoices.map(
+											(choice, choiceIndex) => (
+												<FormControlLabel
+													key={choiceIndex}
+													control={
+														<Radio
+															checked={
+																answers[index]
+																	.selectedChoice ===
+																choices[index]
+																	.questionChoices[
+																	choiceIndex
+																]
+															}
+															onChange={() =>
+																handleChoiceChange(
+																	index,
+																	choiceIndex
+																)
+															}
+														/>
+													}
+													label={
+														<TextField
+															fullWidth
+															required
+															variant="filled"
+															value={choice}
+															onChange={(e) =>
+																handleChoiceChange(
+																	index,
+																	choiceIndex,
+																	e.target
+																		.value
+																)
+															}
+														/>
+													}
+													sx={{ pl: 4 }}
+												/>
+											)
+										)}
+									</RadioGroup>
+								</div>
+							);
+						})}
+					</List>
+					<Button
+						sx={{ mt: 5 }}
+						variant="contained"
+						onClick={handleSave}
+						disabled={!form.testName}
+					>
+						Save
+					</Button>
+				</Box>
+			</Box>
+		</Box>
 	);
 };
 
