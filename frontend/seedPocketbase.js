@@ -64,6 +64,7 @@ async function run() {
       const answerRecord = await pb
         .collection("answers")
         .create(JSON.stringify(answer));
+      answerIds.push(answerRecord.id);
     }
 
     await pb.collection('questions').create(JSON.stringify({
