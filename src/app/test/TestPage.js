@@ -21,22 +21,9 @@ import {
 import mascotsLeft from "@/assets/mascotsLeft.png";
 import mascotsRight from "@/assets/mascotsRight.png";
 
-const TestPage = () => {
-	const testName = "";
-
-	const [formData, setFormData] = useState([]);
-
-	const [questions, setQuestions] = useState([
-		{ question: "Quiz question number one?" },
-		{ question: "Quiz question number two?" },
-		{ question: "Quiz question number three?" },
-	]);
-	const [choices, setChoices] = useState([
-		{ questionChoices: ["Choice 1", "Choice 2", "Choice 3"] },
-		{ questionChoices: ["Choice 1", "Choice 2", "Choice 3"] },
-		{ questionChoices: ["Choice 1", "Choice 2", "Choice 3"] },
-	]);
-
+const TestPage = (data) => {
+	const testName = data.test.name;
+	const [questions, setQuestions] = useState(data.questionsAndAnswers);
 	const [studentName, setStudentName] = useState("");
 	const handleChange = (event) => {
 		setStudentName(event.target.value);
@@ -46,22 +33,32 @@ const TestPage = () => {
 
 	const allQuestionsAnswered = answers.every((answer) => answer !== "");
 
-	const handleAnswerChange = (questionIndex, choice) => {
+	const handleAnswerChange = (questionIndex, answerId) => {
 		const newAnswers = [...answers];
-		newAnswers[questionIndex] = choice;
+		newAnswers[questionIndex] = answerId;
 		setAnswers(newAnswers);
-		console.log(newAnswers);
 	};
 
-	const handleSubmit = () => {
-		const answeredData = questions.map((question, index) => ({
-			question: question.question,
-			answer: answers[index] || "",
-		}));
-		console.log("Answered Data:", answeredData);
+	const handleSubmit = async () => {
+		const answerData = { studentName: studentName, answers: answers };
 
-		setFormData([{ studentName: studentName, answers: answeredData }]);
-		console.log(formData);
+		try {
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(answerData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update');
+      }
+
+      const result = await response.json();
+			console.log(result)
+    } catch (_error) {
+    }
 	};
 
 	return (
@@ -72,7 +69,6 @@ const TestPage = () => {
 				justifyContent: "center",
 				alignItems: "center",
 				width: "100%",
-				height: "100vh",
 				mt: 15,
 				mb: 15,
 			}}
@@ -137,13 +133,14 @@ const TestPage = () => {
 										)
 									}
 								>
-									{choices[index]?.questionChoices.map(
-										(choice, choiceIndex) => (
+									{question.answers.map(
+										(answer) => (
 											<FormControlLabel
-												key={choiceIndex}
-												value={choice}
+												id={answer.id}
+												key={answer.id}
+												value={answer.id}
 												control={<Radio />}
-												label={choice}
+												label={answer.answer}
 												sx={{ pl: 4 }}
 											/>
 										)
