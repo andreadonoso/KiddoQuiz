@@ -36,7 +36,7 @@ const QRPage = () => {
         <QRCode size="256" value={`https://kq.fernando.is/test/`} />
 
         <Typography variant="h3" p={5}>
-          <strong>Miami History</strong>
+          <strong>History of Miami</strong>
         </Typography>
       </Box>
       <Box

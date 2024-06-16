@@ -4,7 +4,7 @@ import HomePage from "./HomePage";
 export async function getClassList() {
   const pb = await pocketBase();
   const classList = await pb.collection("classes").getFullList({
-    sort: "-created",
+    sort: "+created",
     expand: "tests",
   });
   return classList;
