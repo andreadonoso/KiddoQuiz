@@ -30,7 +30,7 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
-import logo from "../assets/logo.png";
+import logo from "@/assets/logo.png";
 import { useState } from "react";
 import { getImageURL } from "@/utils/pocketbase";
 
@@ -159,7 +159,7 @@ export default function HomePage({ classList }) {
           columns={{ xs: 2, sm: 2, md: 8, lg: 12 }}
         >
           <Grid item xs={2} sm={4} md={4}>
-            <a href="/create">
+            <Button href="/create">
               <Card
                 sx={{
                   maxWidth: 345,
@@ -180,7 +180,7 @@ export default function HomePage({ classList }) {
                   </Typography>
                 </CardContent>
               </Card>
-            </a>
+            </Button>
           </Grid>
           {classList[0].expand.tests.map((test) => (
             <Grid item xs={2} sm={4} md={4} key={test.id}>
@@ -206,13 +206,13 @@ export default function HomePage({ classList }) {
                     justifyContent: "space-between",
                   }}
                 >
-                  <Button size="small" href={`/quiz/edit/${test.id}`}>
+                  <Button size="small" href={`/edit`}>
                     Edit
                   </Button>
-                  <Button size="small" href={`/quiz/scores/${test.id}`}>
+                  <Button size="small" href={`/scores`}>
                     Scores
                   </Button>
-                  <Button size="small" href={`/quiz/qr/${test.id}`}>
+                  <Button size="small" href={`/qr`}>
                     Share
                   </Button>
                 </CardActions>

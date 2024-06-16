@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AppBar, Toolbar, Avatar, CssBaseline } from "@mui/material";
-import logo from "../assets/logo.png";
+import logo from "@/assets/logo.png";
 
 const pages = ["Products", "Pricing", "Blog"] || [];
 const settings = ["Profile", "Account", "Dashboard", "Logout"] || [];

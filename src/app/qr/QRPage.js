@@ -2,8 +2,8 @@
 
 import QRCode from "qrcode.react";
 import { Box, Typography } from "@mui/material";
-import mascotsLeft from "../../../../assets/mascotsLeft.png";
-import mascotsRight from "../../../../assets/mascotsRight.png";
+import mascotsLeft from "@/assets/mascotsLeft.png";
+import mascotsRight from "@/assets/mascotsRight.png";
 
 const QRPage = () => {
 	const className = "";

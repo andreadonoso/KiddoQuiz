@@ -1,9 +1,8 @@
-import React, { useState, useRef } from "react";
-import { Box, Typography, Button, Toolbar, Fade } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, Button, Fade } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Header from "../components/Header";
-import mascotUpload from "../assets/mascotUpload.png";
-import mascotUploadSuccess from "../assets/mascotUploadSuccess.png";
+import mascotUpload from "@/assets/mascotUpload.png";
+import mascotUploadSuccess from "@/assets/mascotUploadSuccess.png";
 
 const VisuallyHiddenInput = styled("input")({
 	clip: "rect(0 0 0 0)",

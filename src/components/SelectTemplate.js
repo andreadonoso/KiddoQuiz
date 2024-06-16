@@ -1,22 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
 	Box,
 	Typography,
 	Button,
-	Toolbar,
-	Fade,
 	Grid,
 	Card,
-	CardContent,
 	CardMedia,
 	CardActions,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Header from "../components/Header";
-import mascotUpload from "../assets/mascotUpload.png";
-import mascotUploadSuccess from "../assets/mascotUploadSuccess.png";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import samplePic from "../assets/pic.png";
+import samplePic from "@/assets/pic.png";
 
 const SelectTemplate = ({ handleClick }) => {
 	const [suggested, setSuggested] = useState([

@@ -1,14 +1,12 @@
 'use client';
 
-import React, { useState, useRef } from "react";
-import { Box, Typography, Button, Toolbar, Fade } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Toolbar, Fade } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Header from "../../components/Header";
-import mascotUpload from "../../assets/mascotUpload.png";
-import mascotUploadSuccess from "../../assets/mascotUploadSuccess.png";
-import UploadFile from "../../components/UploadFile";
-import SelectTemplate from "../../components/SelectTemplate";
-import PreviewTest from "../../components/PreviewTest";
+import Header from "@/components/Header";
+import UploadFile from "@/components/UploadFile";
+import SelectTemplate from "@/components/SelectTemplate";
+import PreviewTest from "@/components/PreviewTest";
 
 const VisuallyHiddenInput = styled("input")({
 	clip: "rect(0 0 0 0)",
