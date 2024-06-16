@@ -35,7 +35,7 @@ const UploadPage = ({ handleClick }) => {
 				m={3}
 			>
 				<Button
-					sx={{ ml: 3 }}
+					sx={{ ml: 3, backgroundColor: "#F7C65F" }}
 					variant="contained"
 					color="secondary"
 					href="/"

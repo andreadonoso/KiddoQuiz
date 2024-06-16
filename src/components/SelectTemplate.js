@@ -9,31 +9,34 @@ import {
 	CardActions,
 } from "@mui/material";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import samplePic from "@/assets/pic.png";
+
+import s1 from "@/assets/s1.png";
+import s2 from "@/assets/s2.png";
+import s3 from "@/assets/s3.png";
+import s4 from "@/assets/s4.png";
+import s5 from "@/assets/s5.png";
+import s6 from "@/assets/s6.png";
 
 const SelectTemplate = ({ handleClick }) => {
 	const [suggested, setSuggested] = useState([
-		{ templateName: "Suggested Template Name", pic: samplePic },
-		{ templateName: "Suggested Template Name", pic: samplePic },
-		{ templateName: "Suggested Template Name", pic: samplePic },
-		{ templateName: "Suggested Template Name", pic: samplePic },
-		{ templateName: "Suggested Template Name", pic: samplePic },
-		{ templateName: "Suggested Template Name", pic: samplePic },
+		{ templateName: "Image Recognition", pic: s1.src },
+		{ templateName: "Multiple Choice Quiz", pic: s2.src },
+		{ templateName: "Word Search", pic: s3.src },
 	]);
 
 	const [templates, setTemplates] = useState([
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
-		{ templateName: "Template Name", pic: samplePic },
+		{ templateName: "Geography Treasure Hunt", pic: s4.src },
+		{ templateName: "Science Lab Escape Room", pic: s5.src },
+		{ templateName: "Art Masterpiece Match", pic: s6.src },
+		{ templateName: "Word Search", pic: s3.src },
+		{ templateName: "Image Recognition", pic: s1.src },
+		{ templateName: "Multiple Choice Quiz", pic: s2.src },
+		{ templateName: "Science Lab Escape Room", pic: s5.src },
+		{ templateName: "Geography Treasure Hunt", pic: s4.src },
+		{ templateName: "Art Masterpiece Match", pic: s6.src },
+		{ templateName: "Image Recognition", pic: s1.src },
+		{ templateName: "Multiple Choice Quiz", pic: s2.src },
+		{ templateName: "Word Search", pic: s3.src },
 	]);
 	return (
 		<>
@@ -47,12 +50,10 @@ const SelectTemplate = ({ handleClick }) => {
 				m={3}
 			>
 				<Button
-					sx={{ ml: 3 }}
+					sx={{ ml: 3, backgroundColor: "#F7C65F" }}
 					variant="contained"
-					color="secondary"
 					onClick={() => {
 						handleClick("Upload File");
-						// alert("Warning: all changes will be lost");
 					}}
 				>
 					Back
@@ -116,6 +117,9 @@ const SelectTemplate = ({ handleClick }) => {
 								sx={{
 									display: "flex",
 									justifyContent: "center",
+								}}
+								onClick={() => {
+									window.location.href = "/edit";
 								}}
 							>
 								<Card
@@ -205,6 +209,9 @@ const SelectTemplate = ({ handleClick }) => {
 								sx={{
 									display: "flex",
 									justifyContent: "center",
+								}}
+								onClick={() => {
+									window.location.href = "/edit";
 								}}
 							>
 								<Card
